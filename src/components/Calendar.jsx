@@ -6,7 +6,7 @@ import './style/Calendar.css'
 const Calendar = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-    const [pickedDays, setPickedDays] = useState([new Date(currentYear, currentMonth, new Date().getDate())])
+    const [pickedDays, setPickedDays] = useState([])
 
     const handlePrevClick = () => {
         setCurrentMonth(currentMonth - 1)
