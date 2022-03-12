@@ -4,10 +4,6 @@
 	text-align: center;
 }
 
-body {
-	background: rgba(0, 0, 0, 0.137);
-}
-
 .cal {
 	display: flex;
 	flex-direction: column;
@@ -27,7 +23,6 @@ body {
 	flex-wrap: wrap;
 	background-color:  rgba(56, 141, 48, 0.6);
 	font-weight: bold;
-
 }
 
 .calBody {
@@ -58,6 +53,7 @@ body {
 .none {
 	color: rgba(0, 0, 0, 0.267);
 	background-color: rgba(0, 0, 0, 0.062);
+	cursor: default;
 }
 
 .curr {

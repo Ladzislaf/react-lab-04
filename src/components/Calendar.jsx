@@ -1,40 +1,44 @@
-import { useState } from "react"
-import CalendarBody from "./CalendarBody"
-import CalendarHead from "./CalendarHead"
+import { useState } from 'react'
+import CalendarBody from './CalendarBody'
+import CalendarHead from './CalendarHead'
 import './style/Calendar.css'
 
-// TODO: че за индекс
-// + TODO: добавить отображение текущего года
-// + TODO: calendarHead должен быть отдельно
-// TODO: возможность выбирать дни при помощи клика мыши. 
-// Выбранные пользователем дни храните как состояние в Calendar. Выделите выбранные дни цветом.
 const Calendar = () => {
-	const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
-	const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-	const [pickedDays, setpickedDays] = useState([])
+    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
+    const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+    const [pickedDays, setPickedDays] = useState([new Date(currentYear, currentMonth, new Date().getDate())])
 
-	console.log(currentYear)
+    const handlePrevClick = () => {
+        setCurrentMonth(currentMonth - 1)
+        if (currentMonth % 12 === 0) {
+            setCurrentYear(currentYear - 1)
+        }
+    }
 
-	const handlePrevClick = () => {
-		setCurrentMonth(currentMonth - 1)
-		if(currentMonth % 12 === 0) {
-			setCurrentYear(currentYear - 1)
+    const handleNextClick = () => {
+        setCurrentMonth(currentMonth + 1)
+        if ((currentMonth + 1200) % 12 === 11) {
+            setCurrentYear(currentYear + 1)
+        }
+    }
+
+    const handleDayClick = (e, month, year) => {
+		let day = new Date(year, month, e.target.dataset.user)
+
+		for (let i = 0; i < pickedDays.length; i++) {
+			if (pickedDays[i].valueOf() === day.valueOf()) {
+				let copy = pickedDays.slice()
+				copy.splice(i, 1)
+				// remove day
+				setPickedDays(copy)
+				return
+			}
 		}
-	}
-	
-	const handleNextClick = () => {
-		setCurrentMonth(currentMonth + 1)	
-		if(currentMonth % 12 === 11) {
-			setCurrentYear(currentYear + 1)
-		}
-	}
+		// add new day
+		setPickedDays([...pickedDays, day])
+    }
 
-	const handleDayClick = (e) => {
-		// console.log(e.target)
-		// e.target.className += ' checked'
-	}
-
-	return (
+    return (
         <div className={'cal'}>
             <CalendarHead
                 currentMonth={currentMonth}
@@ -45,7 +49,9 @@ const Calendar = () => {
             <CalendarBody
                 currentMonthIndex={currentMonth}
                 handleDayClick={handleDayClick}
+				pickedDays={pickedDays}
             />
+            <div>{pickedDays.value}</div>
         </div>
     )
 }
