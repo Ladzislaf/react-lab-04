@@ -7,8 +7,7 @@
 .cal {
 	display: flex;
 	flex-direction: column;
-	margin: auto;
-	margin-top: 50px;
+	margin: 50px auto;
 	padding: 0px 0px 0px 0px;
 	width: 421px;
 	border: 1px solid green;
@@ -53,7 +52,7 @@
 .none {
 	color: rgba(0, 0, 0, 0.267);
 	background-color: rgba(0, 0, 0, 0.062);
-	cursor: default;
+	pointer-events: none;
 }
 
 .curr {
